@@ -10,15 +10,14 @@ async function controlRecipes() {
     if (!id) return;
     recipeView.renderSpinner();
     await model.loadRecipe(id);
-
     recipeView.render(model.state.recipe);
-
   } catch (err) {
-    console.log(err);
+    recipeView.renderError();
   }
 }
 
 function init() {
   recipeView.addHandlerRender(controlRecipes);
 }
+
 init();
