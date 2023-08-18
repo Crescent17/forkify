@@ -39,7 +39,7 @@ function controlPagination(goToPage) {
 
 function controlServings(newServings) {
   model.updateServings(newServings);
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 }
 
 function init() {
