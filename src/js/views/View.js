@@ -19,11 +19,11 @@ export default class View {
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
-      if (!curEl.isEqualNode(newEl) && newEl?.firstChild.nodeValue.trim() !== '') {
+      if (!curEl.isEqualNode(newEl) && newEl.firstChild?.nodeValue.trim() !== '') {
         curEl.textContent = newEl.textContent;
       }
       if (!curEl.isEqualNode(newEl)) {
-        Array.from(newEl.attributes).forEach(attr => curEl.setAttribute(attr.name, attr.value))
+        Array.from(newEl.attributes).forEach(attr => curEl.setAttribute(attr.name, attr.value));
       }
     });
   }
