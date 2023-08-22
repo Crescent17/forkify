@@ -66,6 +66,8 @@ async function controlAddRecipe(newRecipe) {
     await model.uploadRecipe(newRecipe);
     recipeView.render(model.state.recipe);
     addRecipeView.renderMessage();
+    bookmarksView.render(model.state.bookmarks);
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
     setTimeout(function() {
       addRecipeView.toggleWindow();
     }, 1000 * MODAL_CLOSE_SEC);
