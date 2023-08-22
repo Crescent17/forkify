@@ -4,9 +4,11 @@ import searchView from './views/searchView';
 import resultsView from './views/resultsView';
 import bookmarksView from './views/bookmarksView';
 import paginationView from './views/paginationView';
+import addRecipeView from './views/addRecipeView';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import { MODAL_CLOSE_SEC } from './config';
 
 async function controlRecipes() {
   try {
@@ -58,6 +60,20 @@ function controlBookmarks() {
   bookmarksView.render(model.state.bookmarks);
 }
 
+async function controlAddRecipe(newRecipe) {
+  try {
+    addRecipeView.renderSpinner();
+    await model.uploadRecipe(newRecipe);
+    recipeView.render(model.state.recipe);
+    addRecipeView.renderMessage();
+    setTimeout(function() {
+      addRecipeView.toggleWindow();
+    }, 1000 * MODAL_CLOSE_SEC);
+  } catch (err) {
+    addRecipeView.renderError(err.message);
+  }
+}
+
 function init() {
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
@@ -65,6 +81,7 @@ function init() {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 }
 
 init();
