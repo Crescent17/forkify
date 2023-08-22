@@ -54,7 +54,12 @@ function controlAddBookmark() {
   bookmarksView.render(model.state.bookmarks);
 }
 
+function controlBookmarks() {
+  bookmarksView.render(model.state.bookmarks);
+}
+
 function init() {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
